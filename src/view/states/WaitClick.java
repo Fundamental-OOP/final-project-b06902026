@@ -13,11 +13,9 @@ public class WaitClick implements State {
         board.getClicked(id).getView().unclick();
     }
     public State run() {
-        // TODO: System.out.println(board.nClicked());
         if (board.getModel().nClicked() == 2) {
             unclickCandy(0);
             unclickCandy(1);
-            // TODO: board.clearClicked();
             return new Swap(board);
         }
         else

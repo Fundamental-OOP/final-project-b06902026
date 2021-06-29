@@ -25,16 +25,6 @@ class WrappedCandy extends Candy {
         CandyMatrix surrounding =
             new CandyMatrix(CandyMatrix.getArea(bound), getBlock().getBoard());
         surrounding.remove();
-        /*
-        getBlock().up().removeCandy();
-        getBlock().down().removeCandy();
-        getBlock().right().removeCandy();
-        getBlock().left().removeCandy();
-        getBlock().up().left().removeCandy();
-        getBlock().up().right().removeCandy();
-        getBlock().down().left().removeCandy();
-        getBlock().down().right().removeCandy();
-        */
     }
     public WrappedCandy(String color, Block block) {
         super(name, color, block, "Wrapped");

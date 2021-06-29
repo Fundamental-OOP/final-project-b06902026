@@ -49,7 +49,6 @@ public class Board extends JPanel implements Runnable {
         state = new Initial(this);
         prev = System.currentTimeMillis();
         while (true) {
-            // TODO: System.out.println(state.getName());
             step();
             repaint();
             try {

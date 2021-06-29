@@ -71,7 +71,6 @@ public class Candy extends JLabel implements MouseListener {
         setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
     }
     public void click() {
-        System.out.printf("(%d,%d)\n", prev.block.x, prev.block.y);
         setOpaque(true);
         setBackground(Color.lightGray);
     }

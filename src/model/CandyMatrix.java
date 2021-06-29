@@ -66,9 +66,11 @@ public class CandyMatrix extends Matrix {
         int nRows = Board.nRows;
         int nCols = Board.nColumns;
         boolean[][] matrix = new boolean[nRows][nCols];
-        for (int i = 0; i < bound.height && bound.row+i < nRows; i++)
-            for (int j = 0; j < bound.width && bound.col+j < nCols; j++)
-                matrix[bound.row+i][bound.col+j] = true;
+        for (int i = 0, y = bound.row; i < bound.height; i++, y++)
+            for (int j = 0, x = bound.col; j < bound.width; j++, x++) {
+                if (x < 0 || x >= nCols || y < 0 || y >= nRows) continue;
+                matrix[y][x] = true;
+            }
         return matrix;
     }
     public CandyMatrix(boolean[][] matrix, Board board) {
