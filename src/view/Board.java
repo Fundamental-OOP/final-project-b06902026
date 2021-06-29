@@ -1,14 +1,11 @@
 package view;
 
-import java.awt.Dimension;
-
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import model.Candy;
 import model.Game;
-import view.states.Fall;
-import view.states.WaitClick;
+import view.states.Initial;
 
 public class Board extends JPanel implements Runnable {
     private final int DELAY = 25;
@@ -49,7 +46,7 @@ public class Board extends JPanel implements Runnable {
     }
     @Override
     public void run() {
-        state = new Fall(this);
+        state = new Initial(this);
         prev = System.currentTimeMillis();
         while (true) {
             // TODO: System.out.println(state.getName());

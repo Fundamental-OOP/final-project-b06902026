@@ -81,27 +81,23 @@ public class Board {
         getView().remove(candy.getView());
     }
     public void fillBlank() {
+        fillBlank(
+            new CandyGenerator[nRows][nColumns], new String[nRows][nColumns]);
+    }
+    public void fillBlank(CandyGenerator[][] candies, String[][] colors) {
         int[] nBlanks = new int[nColumns];
         for (int j = 0; j < nColumns; j++)
             for (int i = 0; i < nRows; i++)
                 nBlanks[j] += getBlock(i, j).hasCandy()? 0 : 1;
         for (int i = 0; i < nRows; i++)
             for (int j = 0; j < nColumns; j++)
-                if (!getBlock(i, j).hasCandy())
-                    newCandy(i - nBlanks[j], j, i, j);
-        // TODO: remove
-        /*
-        for (int j = 0; j < nColumns; j++) {
-            for (int i = 0; i < nRows; i++)
-                System.out.printf(
-                    "(%d,%d,%d,%d)",
-                    getBlock(i, j).getCandy().getView().prev.block.x,
-                    getBlock(i, j).getCandy().getView().prev.block.y,
-                    getBlock(i, j).getCandy().getView().next.block.x,
-                    getBlock(i, j).getCandy().getView().next.block.y);
-            System.out.println("");
-        }
-        */
+                if (!getBlock(i, j).hasCandy()) {
+                    if (candies[i][j] == null || colors[i][j] == null)
+                        newCandy(i - nBlanks[j], j, i, j);
+                    else
+                        newCandy(
+                            candies[i][j], colors[i][j], i-nBlanks[j], j, i, j);
+                }
     }
     public boolean hasBlank() {
         for (int i = 0; i < nRows; i++)
@@ -124,10 +120,10 @@ public class Board {
             }
     }
     public Board(String[] colors) {
-        this.colors = colors;
-        for (int i = 0; i < nRows; i++)
-            for (int j = 0; j < nColumns; j++) {
-                blocks[i][j] = new Block(i, j);
-            }
-    }
+            this.colors = colors;
+            for (int i = 0; i < nRows; i++)
+                for (int j = 0; j < nColumns; j++) {
+                    blocks[i][j] = new Block(i, j);
+                }
+        }
 }

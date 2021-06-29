@@ -1,6 +1,7 @@
 package view.states;
 
 import model.Candy;
+import model.CandyGenerator;
 import view.Board;
 import view.State;
 
@@ -34,5 +35,10 @@ public class Fall implements State {
         this.board = board;
         board.getModel().fall();
         board.getModel().fillBlank();
+    }
+    public Fall(Board board, CandyGenerator[][] candies, String[][] colors) {
+        this.board = board;
+        board.getModel().fall();
+        board.getModel().fillBlank(candies, colors);
     }
 }
