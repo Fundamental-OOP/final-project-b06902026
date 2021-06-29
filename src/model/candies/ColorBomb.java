@@ -4,6 +4,7 @@ import model.Block;
 import model.Board;
 import model.Candy;
 import model.CandyGenerator;
+import model.CandyMatrix;
 
 public class ColorBomb implements CandyGenerator {
     public Candy get(String color, Block prev, Block next) {
@@ -20,12 +21,10 @@ class ColorBombCandy extends Candy {
         super.remove();
         if (!hasSpecialEffect) return;
         Board board = getBlock().getBoard();
-        for (int i = 0; i < Board.nRows; i++)
-            for (int j = 0; j < Board.nColumns; j++) {
-                Candy candy = board.getBlock(i, j).getCandy();
-                if (candy != null && candy.isSameColor(color))
-                    candy.remove();
-            }
+        CandyMatrix candies =
+            new CandyMatrix(
+                CandyMatrix.getSameColor(board, color), board);
+        candies.remove();
     }
     @Override
     public void remove() {

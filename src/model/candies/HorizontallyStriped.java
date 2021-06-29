@@ -1,8 +1,11 @@
 package model.candies;
 
 import model.Block;
+import model.Board;
 import model.Candy;
 import model.CandyGenerator;
+import model.CandyMatrix;
+import model.Matrix;
 
 public class HorizontallyStriped implements CandyGenerator {
     public Candy get(String color, Block prev, Block next) {
@@ -19,9 +22,12 @@ class HorizontallyStripedCandy extends Candy {
     public void remove() {
         super.remove();
         if (!hasSpecialEffect) return;
-        Block[] row = getBlock().getRow();
-        for (int i = 0; i < row.length; i++)
-            row[i].removeCandy();
+        Board board = getBlock().getBoard();
+        Matrix.Bound row =
+            new Matrix.Bound(getBlock().row, 0, 1, Board.nColumns);
+        CandyMatrix candies =
+            new CandyMatrix(CandyMatrix.getArea(row), board);
+        candies.remove();
     }
     public HorizontallyStripedCandy(String color, Block block) {
         super(name, color, block, "StripedH");

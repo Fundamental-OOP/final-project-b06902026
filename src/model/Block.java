@@ -55,14 +55,8 @@ public class Block {
     public Board getBoard() {
         return board;
     }
-    public Block[] getRow() {
-        return getBoard().getRow(row);
-    }
     public view.Block getView() {
         return new view.Block(new Dimension(column, row));
-    }
-    public Block[] getColumn() {
-        return getBoard().getColumn(column);
     }
     public void fillBlankWithCandyAbove() {
         if (hasCandy()) return;

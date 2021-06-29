@@ -7,13 +7,12 @@ public class Game extends JFrame {
         Board boardView = new Board(board, game);
         board.setView(boardView);
         add(boardView);
-        // board.fillBlank();
-        int width = board.nColumns * Block.width + 15;
-        int height = board.nRows * Block.height + 40;
+        int width = model.Board.nColumns * Block.width + 15;
+        int height = model.Board.nRows * Block.height + 40;
         setSize(width, height);
         setTitle("Candy Crush");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setResizable(false);
+        setResizable(false);
         setLocationRelativeTo(null);
     }
 }

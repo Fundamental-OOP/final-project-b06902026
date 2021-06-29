@@ -49,17 +49,6 @@ public class Board {
         else
             return new NullBlock(row, column);
     }
-    public Block[] getRow(int rowIdx) {
-        if (!validRow(rowIdx)) return new Block[0];
-        return blocks[rowIdx];
-    }
-    public Block[] getColumn(int columnIdx) {
-        if (!validColumn(columnIdx)) return new Block[0];
-        Block[] column = new Block[nRows];
-        for (int i = 0; i < nRows; i++)
-            column[i] = blocks[i][columnIdx];
-        return column;
-    }
     public String getRandomColor() {
         return colors[random.nextInt(colors.length)];
     }
