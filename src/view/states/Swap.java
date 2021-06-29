@@ -20,15 +20,6 @@ public class Swap implements State {
         candy1.getView().step();
         candy2.getView().step();
     }
-    private void print() {
-        System.out.print("blank: ");
-        for (int i = 0; i < board.getModel().nRows; i++)
-            for (int j = 0; j < board.getModel().nColumns; j++) {
-                if (!board.getModel().getBlock(i, j).hasCandy())
-                    System.out.printf("(%d,%d)", i, j);
-            }
-        System.out.println("");
-    }
     public State run() {
         if (!allArrived()) step();
         if (!allArrived()) return this;
@@ -38,7 +29,6 @@ public class Swap implements State {
                 game.combine(candy1, candy2);
             else
                 game.clear(candy1, candy2);
-            //return new WaitClick(board);
             return new Fall(board);
         }
         else

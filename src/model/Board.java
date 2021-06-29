@@ -119,12 +119,6 @@ public class Board {
                             candies[i][j], colors[i][j], i-nBlanks[j], j, i, j);
                 }
     }
-    public boolean hasBlank() {
-        for (int i = 0; i < nRows; i++)
-            for (int j = 0; j < nColumns; j++)
-                if (!getBlock(i, j).hasCandy()) return true;
-        return false;
-    }
     public void fall() {
         for (int i = nRows-1; i >= 0; i--)
             for (int j = 0; j < nColumns; j++)

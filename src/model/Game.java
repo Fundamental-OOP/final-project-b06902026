@@ -4,33 +4,12 @@ public class Game {
     MatchRuleGenerator[] matchRules;
     CombineRuleGenerator[] combineRules;
     public boolean isValidSwap(Candy candy1, Candy candy2) {
-        if (!candy1.isNeighbor(candy2)) {
-            System.out.println("not neighbor");
-            return false;
-        }
-        if (isCombinable(candy1, candy2)) {
-            System.out.println("is combinable");
-            return true;
-        }
-        if (isMatched(candy1)) {
-            System.out.println("match candy1: " + candy1.getColor());
-            return true;
-        }
-        if (isMatched(candy2)) {
-            System.out.println("match candy2: " + candy2.getColor());
-            return true;
-        }
-        return false;
-    }
-    /*
-    public boolean isValidSwap(Candy candy1, Candy candy2) {
         if (!candy1.isNeighbor(candy2)) return false;
         if (isCombinable(candy1, candy2)) return true;
         if (isMatched(candy1)) return true;
         if (isMatched(candy2)) return true;
         return false;
     }
-    */
     public Rule getMatchRule(Candy candy) {
         for (MatchRuleGenerator ruleGen: matchRules) {
             Rule rule = ruleGen.get(candy);
@@ -59,8 +38,24 @@ public class Game {
         clear(candy2);
     }
     public void clear(Candy candy) {
+        if (candy == null) return;
         if (isMatched(candy))
             getMatchRule(candy).act();
+    }
+    public void clear(Board board) {
+        for (int i = 0; i < Board.nRows; i++)
+            for (int j = 0; j < Board.nColumns; j++) {
+                Candy candy = board.getBlock(i, j).getCandy();
+                clear(candy);
+            }
+    }
+    public boolean hasMatched(Board board) {
+        for (int i = 0; i < Board.nRows; i++)
+            for (int j = 0; j < Board.nColumns; j++) {
+                Candy candy = board.getBlock(i, j).getCandy();
+                if (isMatched(candy)) return true;
+            }
+        return false;
     }
     public Game(
         CombineRuleGenerator[] combineRules, MatchRuleGenerator[] matchRules) {

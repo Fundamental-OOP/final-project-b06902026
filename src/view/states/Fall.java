@@ -29,7 +29,10 @@ public class Fall implements State {
     public State run() {
         if (!allArrived()) step();
         if (!allArrived()) return this;
-        return new WaitClick(board);
+        if (board.getGame().hasMatched(board.getModel()))
+            return new ClearMatched(board);
+        else
+            return new WaitClick(board);
     }
     public Fall(Board board) {
         this.board = board;
