@@ -6,6 +6,7 @@ public class Candy {
     private final String suffix;
     private view.Candy view;
     private Block block;
+    public boolean hasSpecialEffect = true;
     public boolean isSameColor(String color) {
         return getColor().equals(color);
     }
@@ -32,6 +33,9 @@ public class Candy {
     }
     public void remove() {
         block.deleteCandy();
+    }
+    public void removeSpecialEffect() {
+        hasSpecialEffect = false;
     }
     private boolean isNeighbor(Block a, Block b) {
         return a.row == b.row && a.column == b.column;

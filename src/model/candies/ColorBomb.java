@@ -18,11 +18,12 @@ class ColorBombCandy extends Candy {
     private static final String name = "ColorBomb";
     public void remove(String color) {
         super.remove();
+        if (!hasSpecialEffect) return;
         Board board = getBlock().getBoard();
         for (int i = 0; i < Board.nRows; i++)
             for (int j = 0; j < Board.nColumns; j++) {
                 Candy candy = board.getBlock(i, j).getCandy();
-                if (candy.isSameColor(color))
+                if (candy != null && candy.isSameColor(color))
                     candy.remove();
             }
     }

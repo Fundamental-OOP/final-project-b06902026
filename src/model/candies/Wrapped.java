@@ -20,6 +20,7 @@ class WrappedCandy extends Candy {
     @Override
     public void remove() {
         super.remove();
+        if (!hasSpecialEffect) return;
         Matrix.Bound bound =
             new Matrix.Bound(getBlock().row-1, getBlock().column-1, 3, 3);
         CandyMatrix surrounding =

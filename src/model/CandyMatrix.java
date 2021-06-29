@@ -23,7 +23,7 @@ public class CandyMatrix extends Matrix {
                     getBlock(bound.row+i, bound.col+j).removeCandy();
             }
     }
-    private static boolean[][] getSameColor(Board board, String color) {
+    public static boolean[][] getSameColor(Board board, String color) {
         boolean[][] isSameColor = new boolean[Board.nRows][Board.nColumns];
         for (int i = 0; i < Board.nRows; i++)
             for (int j = 0; j < Board.nColumns; j++) {
@@ -62,15 +62,20 @@ public class CandyMatrix extends Matrix {
             CandyMatrix.getConnected(sameColor, pivot.row, pivot.column);
         return connected;
     }
-    public static boolean[][] getArea(Bound bound) {
+    private static void set(boolean[][] matrix, Bound bound, boolean bool) {
+        for (int i = 0, y = bound.row; i < bound.height; i++, y++)
+            for (int j = 0, x = bound.col; j < bound.width; j++, x++) {
+                if (x < 0 || x >= matrix[0].length ||
+                    y < 0 || y >= matrix.length) continue;
+                matrix[y][x] = bool;
+            }
+    }
+    public static boolean[][] getArea(Bound ...bounds) {
         int nRows = Board.nRows;
         int nCols = Board.nColumns;
         boolean[][] matrix = new boolean[nRows][nCols];
-        for (int i = 0, y = bound.row; i < bound.height; i++, y++)
-            for (int j = 0, x = bound.col; j < bound.width; j++, x++) {
-                if (x < 0 || x >= nCols || y < 0 || y >= nRows) continue;
-                matrix[y][x] = true;
-            }
+        for (Bound bound: bounds)
+            set(matrix, bound, true);
         return matrix;
     }
     public CandyMatrix(boolean[][] matrix, Board board) {

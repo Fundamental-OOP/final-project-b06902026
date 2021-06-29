@@ -18,6 +18,7 @@ class HorizontallyStripedCandy extends Candy {
     @Override
     public void remove() {
         super.remove();
+        if (!hasSpecialEffect) return;
         Block[] row = getBlock().getRow();
         for (int i = 0; i < row.length; i++)
             row[i].removeCandy();

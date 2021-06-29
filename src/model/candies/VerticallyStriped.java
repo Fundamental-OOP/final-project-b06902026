@@ -18,6 +18,7 @@ class VerticallyStripedCandy extends Candy {
     @Override
     public void remove() {
         super.remove();
+        if (!hasSpecialEffect) return;
         Block[] column = getBlock().getColumn();
         for (int i = 0; i < column.length; i++)
             column[i].removeCandy();

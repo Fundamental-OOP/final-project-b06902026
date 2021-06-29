@@ -80,6 +80,11 @@ public class Board {
         Candy candy = getBlock(row, column).getCandy();
         getView().remove(candy.getView());
     }
+    public void removeAllSpecialEffect() {
+        for (int i = 0; i < nRows; i++)
+            for (int j = 0; j < nColumns; j++)
+                getBlock(i, j).getCandy().removeSpecialEffect();
+    }
     public void fillBlank() {
         fillBlank(
             new CandyGenerator[nRows][nColumns], new String[nRows][nColumns]);
