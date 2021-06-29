@@ -82,8 +82,23 @@ public class Board {
     }
     public void removeAllSpecialEffect() {
         for (int i = 0; i < nRows; i++)
-            for (int j = 0; j < nColumns; j++)
-                getBlock(i, j).getCandy().removeSpecialEffect();
+            for (int j = 0; j < nColumns; j++) {
+                Candy candy = getBlock(i, j).getCandy();
+                if (candy != null) candy.removeSpecialEffect();
+            }
+    }
+    public String getColorWithMostCandies() {
+        int maxNumCandies = 0;
+        String selectedColor = "";
+        for (String color: colors) {
+            int nCandies =
+                (new Matrix(CandyMatrix.getSameColor(this, color))).nOnes();
+            if (nCandies > maxNumCandies) {
+                maxNumCandies = nCandies;
+                selectedColor = color;
+            }
+        }
+        return selectedColor;
     }
     public void fillBlank() {
         fillBlank(

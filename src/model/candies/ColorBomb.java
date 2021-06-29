@@ -29,8 +29,7 @@ class ColorBombCandy extends Candy {
     }
     @Override
     public void remove() {
-        // TODO: color of the most candies
-        String color = "Blue";
+        String color = getBlock().getBoard().getColorWithMostCandies();
         remove(color);
     }
     public void remove(Candy candy) {
