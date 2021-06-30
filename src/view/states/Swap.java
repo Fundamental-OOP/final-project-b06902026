@@ -1,6 +1,5 @@
 package view.states;
 
-import model.Candy;
 import model.Game;
 import view.Board;
 import view.State;
@@ -9,7 +8,7 @@ public class Swap implements State {
     private static final String name = "Swap";
     protected Board board;
     private Game game;
-    private Candy candy1, candy2;
+    private model.Candy candy1, candy2;
     public String getName() {
         return name;
     }
@@ -24,7 +23,7 @@ public class Swap implements State {
         if (!allArrived()) step();
         if (!allArrived()) return this;
         if (game.isValidSwap(candy1, candy2)) {
-            board.getModel().clearClicked();
+            view.Candy.clearClicked();
             if (game.isCombinable(candy1, candy2))
                 game.combine(candy1, candy2);
             else
@@ -37,8 +36,8 @@ public class Swap implements State {
     public Swap(Board board) {
         this.board = board;
         this.game = board.getGame();
-        this.candy1 = board.getClicked(0);
-        this.candy2 = board.getClicked(1);
+        this.candy1 = view.Candy.getClicked(0);
+        this.candy2 = view.Candy.getClicked(1);
         candy1.switchPosition(candy2);
         candy1.getView().calculateNextPosition();
         candy2.getView().calculateNextPosition();

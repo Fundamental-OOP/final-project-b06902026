@@ -3,7 +3,6 @@ package view;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import model.Candy;
 import model.Game;
 import view.states.Initial;
 
@@ -31,9 +30,6 @@ public class Board extends JPanel implements Runnable {
         super.addNotify();
         animator = new Thread(this);
         animator.start();
-    }
-    public Candy getClicked(int id) {
-        return board.clicked.get(id);
     }
     private long getSleepTime() {
         long diff = System.currentTimeMillis() - prev;

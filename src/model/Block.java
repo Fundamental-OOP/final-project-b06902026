@@ -10,6 +10,15 @@ public class Block {
     public static void set(Board board) {
         Block.board = board;
     }
+    public boolean isNeighbor(Block other) {
+        if (other == null) return false;
+        if (row == other.row && column == other.column) return true;
+        if (row == other.row)
+            return column+1 == other.column || column-1 == other.column;
+        if (column == other.column)
+            return row+1 == other.row || row-1 == other.row;
+        return false;
+    }
     public Block left(int n) {
         return board.getBlock(row, column-n);
     }

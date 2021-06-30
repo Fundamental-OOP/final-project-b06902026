@@ -28,15 +28,6 @@ public class Board {
     public view.Board getView() {
         return view;
     }
-    public int nClicked() {
-        return clicked.size();
-    }
-    public void click(Candy candy) {
-        clicked.add(candy);
-    } 
-    public void clearClicked() {
-        clicked = new ArrayList<Candy>();
-    }
     private boolean validRow(int row) {
         return row >= 0 && row < nRows;
     }

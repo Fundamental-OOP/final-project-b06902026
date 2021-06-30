@@ -5,6 +5,7 @@ import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -13,11 +14,25 @@ public class Candy extends JLabel implements MouseListener {
     private static final int STEP_SIZE = 5;
     public static final int width = 40;
     public static final int height = 40;
+    private static ArrayList<model.Candy> clicked = new ArrayList<model.Candy>();
     private model.Candy candy;
     private Dimension pos;
-    // TODO: private
-    public Block prev;
-    public Block next;
+    private Block prev;
+    private Block next;
+    public static int nClicked() {
+        return clicked.size();
+    }
+    public static void clearClicked() {
+        getClicked(0).getView().unclick();
+        getClicked(1).getView().unclick();
+        clicked = new ArrayList<model.Candy>();
+    }
+    public static model.Candy getClicked(int id) {
+        return clicked.get(id);
+    }
+    private static model.Block getClickedBlock(int id) {
+        return getClicked(id).getBlock();
+    }
     private static ImageIcon getIcon(model.Candy candy) {
         String path = String.format(
             "img/%s%s.png", candy.getColor(), candy.getSuffix());
@@ -62,15 +77,32 @@ public class Candy extends JLabel implements MouseListener {
     @Override
     public void mouseReleased(MouseEvent e) {
     }
+    private void setHandCursor() {
+        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }
+    private void setDefaultCursor() {
+        setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));;
+    }
+    private boolean isNeighbor(model.Block other) {
+        return candy.getBlock().isNeighbor(other);
+    }
     @Override
     public void mouseEntered(MouseEvent e) {
-        setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        switch (nClicked()) {
+            case 0: setHandCursor(); break;
+            case 1:
+                if (isNeighbor(getClickedBlock(0))) setHandCursor();
+                else setDefaultCursor();
+                break;
+            default: setDefaultCursor(); break;
+        }
     }
     @Override
     public void mouseExited(MouseEvent e) {
-        setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+        setDefaultCursor();
     }
     public void click() {
+        clicked.add(candy);
         setOpaque(true);
         setBackground(Color.lightGray);
     }
@@ -79,8 +111,9 @@ public class Candy extends JLabel implements MouseListener {
     }
     @Override
     public void mouseClicked(MouseEvent e) {
+        if (nClicked() >= 2) return;
+        if (nClicked() == 1 && !isNeighbor(getClickedBlock(0))) return;
         click();
-        candy.getBlock().getBoard().click(candy);
     }
     public Candy(model.Candy candy) {
         this(candy, candy.getBlock().getView(), candy.getBlock().getView());

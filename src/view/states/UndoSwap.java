@@ -12,7 +12,7 @@ public class UndoSwap extends Swap {
     public State run() {
         if (!allArrived()) step();
         if (!allArrived()) return this;
-        board.getModel().clearClicked();
+        view.Candy.clearClicked();
         return new WaitClick(board);
     }
     public UndoSwap(Board board) {

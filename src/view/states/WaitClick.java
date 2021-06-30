@@ -1,6 +1,7 @@
 package view.states;
 
 import view.Board;
+import view.Candy;
 import view.State;
 
 public class WaitClick implements State {
@@ -9,17 +10,9 @@ public class WaitClick implements State {
     public String getName() {
         return name;
     }
-    private void unclickCandy(int id) {
-        board.getClicked(id).getView().unclick();
-    }
     public State run() {
-        if (board.getModel().nClicked() == 2) {
-            unclickCandy(0);
-            unclickCandy(1);
-            return new Swap(board);
-        }
-        else
-            return this;
+        if (Candy.nClicked() == 2) return new Swap(board);
+        else return this;
     }
     public WaitClick(Board board) {
         this.board = board;
