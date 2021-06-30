@@ -4,7 +4,7 @@ import model.CandyGenerator;
 import view.Board;
 
 public class Initial extends Fall {
-    private static final String name = "Fall";
+    private static final String name = "Initial";
     private static CandyGenerator[][] candies =
         new CandyGenerator[model.Board.nRows][model.Board.nColumns];
     private static String[][] colors =

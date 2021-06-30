@@ -1,7 +1,5 @@
 package model;
 
-import view.Dimension;
-
 public class Block {
     private static Board board;
     private Candy candy = null;
@@ -65,7 +63,7 @@ public class Block {
         return board;
     }
     public view.Block getView() {
-        return new view.Block(new Dimension(column, row));
+        return getBoard().getView().getBlock(row, column);
     }
     public void fillBlankWithCandyAbove() {
         if (hasCandy()) return;

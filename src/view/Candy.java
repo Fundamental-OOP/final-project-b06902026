@@ -1,6 +1,5 @@
 package view;
 
-import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
@@ -12,8 +11,8 @@ import javax.swing.JLabel;
 
 public class Candy extends JLabel implements MouseListener {
     private static final int STEP_SIZE = 5;
-    public static final int width = 40;
-    public static final int height = 40;
+    public static final int width = Block.width;
+    public static final int height = Block.height;
     private static ArrayList<model.Candy> clicked = new ArrayList<model.Candy>();
     private model.Candy candy;
     private Dimension pos;
@@ -61,8 +60,8 @@ public class Candy extends JLabel implements MouseListener {
     private void step(int size) {
         if (arrived()) return;
         Dimension delta = getDirection().multiply(size);
-        pos.set(pos.add(delta));
-        if (exceed()) pos.set(next.pos);
+        pos = new Dimension(pos.add(delta));
+        if (exceed()) pos = new Dimension(next.pos);
         setLocation();
     }
     public void step() {
@@ -102,21 +101,16 @@ public class Candy extends JLabel implements MouseListener {
         setDefaultCursor();
     }
     public void click() {
-        clicked.add(candy);
-        setOpaque(true);
-        setBackground(Color.lightGray);
+        candy.getBlock().getView().click();
     }
     public void unclick() {
-        setOpaque(false);
+        candy.getBlock().getView().unclick();
     }
     @Override
     public void mouseClicked(MouseEvent e) {
         if (nClicked() >= 2) return;
         if (nClicked() == 1 && !isNeighbor(getClickedBlock(0))) return;
         click();
-    }
-    public Candy(model.Candy candy) {
-        this(candy, candy.getBlock().getView(), candy.getBlock().getView());
     }
     public Candy(model.Candy candy, Block prev, Block next) {
         this.candy = candy;

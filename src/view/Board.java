@@ -10,6 +10,8 @@ public class Board extends JPanel implements Runnable {
     private final int DELAY = 25;
     private Game game;
     private model.Board board;
+    private Block[][] blocks =
+        new Block[model.Board.nRows][model.Board.nColumns];
     private Thread animator;
     private long prev;
     private State state;
@@ -19,11 +21,17 @@ public class Board extends JPanel implements Runnable {
     public Game getGame() {
         return game;
     }
-    public int getBlockWidth() {
-        return Block.width;
+    private boolean validRow(int row) {
+        return row >= 0 && row < model.Board.nRows;
     }
-    public int getBlockHeight() {
-        return Block.height;
+    private boolean validColumn(int column) {
+        return column >= 0 && column < model.Board.nColumns;
+    }
+    public Block getBlock(int row, int column) {
+        if (validRow(row) && validColumn(column))
+            return blocks[row][column];
+        else
+            return new Block(new Dimension(column, row));
     }
     @Override
     public void addNotify() {
@@ -58,9 +66,19 @@ public class Board extends JPanel implements Runnable {
             prev = System.currentTimeMillis();
         }
     }
+    private void newBlock(int row, int column) {
+        blocks[row][column] = new Block(new Dimension(column, row));
+        add(blocks[row][column]);
+    }
+    private void initBlocks() {
+        for (int i = 0; i < model.Board.nRows; i++)
+            for (int j = 0; j < model.Board.nColumns; j++)
+                newBlock(i, j);
+    }
     public Board(model.Board board, Game game) {
         this.board = board;
         this.game = game;
         setLayout(null);
+        initBlocks();
     }
 }

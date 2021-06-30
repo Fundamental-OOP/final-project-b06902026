@@ -1,8 +1,8 @@
 package view;
 
-public class Dimension {
-    public int x;
-    public int y;
+public final class Dimension {
+    public final int x;
+    public final int y;
     public Dimension add(Dimension other) {
         return new Dimension(x + other.x, y + other.y);
     }
@@ -20,12 +20,12 @@ public class Dimension {
         int unitY = (y == 0)? 0 : y / Math.abs(y);
         return new Dimension(unitX, unitY);
     }
-    public void set(Dimension dimension) {
-        x = dimension.x;
-        y = dimension.y;
-    }
     public Dimension(int x, int y) {
         this.x = x;
         this.y = y;
+    }
+    public Dimension(Dimension dimension) {
+        this.x = dimension.x;
+        this.y = dimension.y;
     }
 }

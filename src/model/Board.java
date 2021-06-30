@@ -16,7 +16,9 @@ public class Board {
     public void print() {
         for (int i = 0; i < nRows; i++) {
             for (int j = 0; j < nColumns; j++) {
-                System.out.printf("%c ",
+                if (getBlock(i, j).getCandy() == null)
+                    System.out.printf("  ");
+                else System.out.printf("%c ",
                     getBlock(i, j).getCandy().getColor().toCharArray()[0]);
             }
             System.out.println("");
