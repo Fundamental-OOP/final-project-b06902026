@@ -20,11 +20,13 @@ public class Main {
         "Purple",
     };
     private static final CombineRuleGenerator[] combineRules = {
-        new ColorBombBasic(),
         new ColorBomb2(),
-        new WrappedStriped(),
-        new Wrapped2(),
+        new ColorBombBasic(),
+        new ColorBombStriped(),
+        new ColorBombWrapped(),
         new Striped2(),
+        new Wrapped2(),
+        new WrappedStriped(),
     };
     private static final MatchRuleGenerator[] matchRules = {
         new StraightFive(),

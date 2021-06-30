@@ -12,6 +12,16 @@ public class CandyMatrix extends Matrix {
                     getBlock(i, j).removeCandy();
             }
     }
+    public void set(CandyGenerator candy, String color) {
+        for (int i = 0; i < nRow; i++)
+            for (int j = 0; j < nColumn; j++) {
+                if (get(i, j)) {
+                    board.deleteCandy(i, j);
+                    board.newCandy(
+                        candy.get(color, board.getBlock(i, j)), i, j);
+                }
+            }
+    }
     public void remove(Matrix filter) {
         remove(find(filter));
     }
