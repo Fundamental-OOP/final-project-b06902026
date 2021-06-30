@@ -1,5 +1,8 @@
 package view;
 
+import java.awt.Component;
+
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -12,6 +15,7 @@ public class Board extends JPanel implements Runnable {
     private model.Board board;
     private Block[][] blocks =
         new Block[model.Board.nRows][model.Board.nColumns];
+    private JLayeredPane contentPane;
     private Thread animator;
     private long prev;
     private State state;
@@ -66,18 +70,29 @@ public class Board extends JPanel implements Runnable {
             prev = System.currentTimeMillis();
         }
     }
+    @Override
+    public Component add(Component comp, int index) {
+        contentPane.add(comp, Integer.valueOf(index));
+        return this;
+    }
+    @Override
+    public void remove(Component comp) {
+        contentPane.remove(comp);
+        contentPane.repaint();
+    }
     private void newBlock(int row, int column) {
         blocks[row][column] = new Block(new Dimension(column, row));
-        add(blocks[row][column]);
+        add(blocks[row][column], Block.depth);
     }
     private void initBlocks() {
         for (int i = 0; i < model.Board.nRows; i++)
             for (int j = 0; j < model.Board.nColumns; j++)
                 newBlock(i, j);
     }
-    public Board(model.Board board, Game game) {
+    public Board(model.Board board, Game game, JLayeredPane contentPane) {
         this.board = board;
         this.game = game;
+        this.contentPane = contentPane;
         setLayout(null);
         initBlocks();
     }

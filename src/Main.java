@@ -28,9 +28,9 @@ public class Main {
     };
     private static final MatchRuleGenerator[] matchRules = {
         new StraightFive(),
+        new NonStraightFive(),
         new StraightFour(),
         new StraightThree(),
-        new NonStraightFive(),
     };
     private static final Basic basic = new Basic();
     private static final ColorBomb colorBomb = new ColorBomb();

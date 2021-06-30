@@ -12,7 +12,7 @@ public class Board {
     private final Random random = new Random();
     private Block[][] blocks = new Block[nRows][nColumns];
     public ArrayList<Candy> clicked = new ArrayList<Candy>();
-    private view.Board view;
+    private view.Board board;
     public void print() {
         for (int i = 0; i < nRows; i++) {
             for (int j = 0; j < nColumns; j++) {
@@ -24,11 +24,11 @@ public class Board {
             System.out.println("");
         }
     }
-    public void setView(view.Board view) {
-        this.view = view;
+    public void setView(view.Board board) {
+        this.board = board;
     }
     public view.Board getView() {
-        return view;
+        return board;
     }
     private boolean validRow(int row) {
         return row >= 0 && row < nRows;
@@ -56,7 +56,7 @@ public class Board {
     }
     public void newCandy(Candy candy, int row, int column) {
         getBlock(row, column).set(candy);
-        getView().add(candy.getView());
+        getView().add(candy.getView(), view.Candy.depth);
     }
     public void deleteCandy(int row, int column) {
         Candy candy = getBlock(row, column).getCandy();

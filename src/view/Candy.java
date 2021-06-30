@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 
 public class Candy extends JLabel implements MouseListener {
     private static final int STEP_SIZE = 5;
+    public static final int depth = 2;
     public static final int width = Block.width;
     public static final int height = Block.height;
     private static ArrayList<model.Candy> clicked = new ArrayList<model.Candy>();
@@ -102,6 +103,7 @@ public class Candy extends JLabel implements MouseListener {
     }
     public void click() {
         candy.getBlock().getView().click();
+        clicked.add(candy);
     }
     public void unclick() {
         candy.getBlock().getView().unclick();

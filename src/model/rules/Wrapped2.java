@@ -34,8 +34,8 @@ class Wrapped2Rule implements Rule {
             new Matrix.Bound(block.row-2, block.column-2, 5, 5);
         CandyMatrix candies =
             new CandyMatrix(CandyMatrix.getArea(bound), board);
-            candy1.removeSpecialEffect();
-            candy2.removeSpecialEffect();
+        candy1.removeSpecialEffect();
+        candy2.removeSpecialEffect();
         candies.remove();
     }
     public Wrapped2Rule(Candy candy1, Candy candy2) {
