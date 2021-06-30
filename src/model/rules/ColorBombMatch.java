@@ -8,14 +8,14 @@ import model.Matrix;
 import model.Rule;
 import model.candies.ColorBomb;
 
-public class StraightFive implements MatchRuleGenerator {
+public class ColorBombMatch implements MatchRuleGenerator {
     public Rule get(Candy candy) {
-        return new StraightFiveRule(candy);
+        return new ColorBombRule(candy);
     }
 }
 
-class StraightFiveRule implements Rule {
-    public static final String name = "StraightFive";
+class ColorBombRule implements Rule {
+    public static final String name = "ColorBomb";
     private Block pivot;
     private CandyMatrix candies;
     private static final boolean[][] horizontal =
@@ -47,7 +47,7 @@ class StraightFiveRule implements Rule {
         Candy candy = (new ColorBomb()).get("", pivot);
         pivot.getBoard().newCandy(candy, pivot.row, pivot.column);
     }
-    public StraightFiveRule(Candy pivot) {
+    public ColorBombRule(Candy pivot) {
         this.candies = new CandyMatrix(
             CandyMatrix.getConnectedSameColor(pivot.getBlock()),
             pivot.getBlock().getBoard());

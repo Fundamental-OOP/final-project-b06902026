@@ -29,10 +29,11 @@ public class Main {
         new WrappedStriped(),
     };
     private static final MatchRuleGenerator[] matchRules = {
-        new StraightFive(),
-        new NonStraightFive(),
-        new StraightFour(),
-        new StraightThree(),
+        new ColorBombMatch(),
+        new WrappedMatch(),
+        new VerticallyStripedMatch(),
+        new HorizontallyStripedMatch(),
+        new StraightThreeMatch(),
     };
     private static final Basic basic = new Basic();
     private static final ColorBomb colorBomb = new ColorBomb();

@@ -6,7 +6,7 @@ import model.MatchRuleGenerator;
 import model.Matrix;
 import model.Rule;
 
-public class StraightThree implements MatchRuleGenerator {
+public class StraightThreeMatch implements MatchRuleGenerator {
     public Rule get(Candy candy) {
         return new StraightThreeRule(candy);
     }
